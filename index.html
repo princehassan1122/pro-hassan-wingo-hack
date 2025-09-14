@@ -1,58 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIM Database</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f0f0f0;
-        }
-    </style>
-</head>
-<body>
-    <h1>SIM Database</h1>
-    <table id="sim-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>SIM Number</th>
-                <th>Owner Name</th>
-                <th>Phone Number</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="sim-data">
-            <!-- Data will be populated here -->
-        </tbody>
-    </table>
+// SIM data array
+let simData = [
+    { id: 1, simNumber: "1234567890", ownerName: "John Doe", phoneNumber: "03001234567" },
+    { id: 2, simNumber: "9876543210", ownerName: "Jane Doe", phoneNumber: "03007654321" },
+    // Add more data here
+];
 
-    <form id="add-sim-form">
-        <h2>Add New SIM</h2>
-        <label for="sim-number">SIM Number:</label>
-        <input type="text" id="sim-number" name="sim-number"><br><br>
-        <label for="owner-name">Owner Name:</label>
-        <input type="text" id="owner-name" name="owner-name"><br><br>
-        <label for="phone-number">Phone Number:</label>
-        <input type="text" id="phone-number" name="phone-number"><br><br>
-        <button type="submit">Add SIM</button>
-    </form>
+// Function to populate SIM data in table
+function populateSimData() {
+    let simTableBody = document.getElementById("sim-data");
+    simTableBody.innerHTML = "";
 
-    <script>
-        // JavaScript code to populate data and handle form submission
-        // You can add your JavaScript code here
-    </script>
-</body>
-</html>
+    simData.forEach((sim) => {
+        let row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${sim.id}</td>
+            <td>${sim.simNumber}</td>
+            <td>${sim.ownerName}</td>
+            <td>${sim.phoneNumber}</td>
+            <td>
+                <button onclick="editSim(${sim.id})">Edit</button>
+                <button onclick="deleteSim(${sim.id})">Delete</button>
+            </td>
+        `;
+        simTableBody.appendChild(row);
+    });
+}
+
+// Function to add new SIM
+function addSim(simNumber, ownerName, phoneNumber) {
+    let newSim = {
+        id: simData.length + 1,
+        simNumber: simNumber,
+        ownerName: ownerName,
+        phoneNumber: phoneNumber,
+    };
+    simData.push(newSim);
+    populateSimData();
+}
+
+// Function to edit SIM
+function editSim(id) {
+    let sim = simData.find((sim) => sim.id === id);
+    if (sim) {
+        let newSimNumber = prompt("Enter new SIM number:");
+        let newOwnerName = prompt("Enter new owner name:");
+        let newPhoneNumber = prompt("Enter new phone number:");
+
+        sim.simNumber = newSimNumber;
+        sim.ownerName = newOwnerName;
+        sim.phoneNumber = newPhoneNumber;
+        populateSimData();
+    }
+}
+
+// Function to delete SIM
+function deleteSim(id) {
+    simData = simData.filter((sim) => sim.id !== id);
+    populateSimData();
+}
+
+// Event listener for add SIM form submission
+document.getElementById("add-sim-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    let simNumber = document.getElementById("sim-number").value;
+    let ownerName = document.getElementById("owner-name").value;
+    let phoneNumber = document.getElementById("phone-number").value;
+
+    addSim(simNumber, ownerName, phoneNumber);
+
+    // Clear form fields
+    document.getElementById("sim-number").value = "";
+    document.getElementById("owner-name").value = "";
+    document.getElementById("phone-number").value = "";
+});
+
+// Populate SIM data on page load
+populateSimData();
