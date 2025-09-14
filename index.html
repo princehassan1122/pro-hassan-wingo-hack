@@ -3,31 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fake Number Generator</title>
+    <title>SIM Database</title>
     <style>
         body {
             font-family: Arial, sans-serif;
         }
-        .container {
-            width: 80%;
-            margin: 40px auto;
-            text-align: center;
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Fake Number Generator</h1>
-        <button id="generate-btn">Generate Fake Number</button>
-        <p id="fake-number"></p>
+    <h1>SIM Database</h1>
+    <table id="sim-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>SIM Number</th>
+                <th>Owner Name</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="sim-data">
+            <!-- Data will be populated here -->
+        </tbody>
+    </table>
 
-        <script>
-            document.getElementById('generate-btn').addEventListener('click', function() {
-                // Fake number generate karne ka logic yahan add karen
-                let fakeNumber = Math.floor(1000000000 + Math.random() * 9000000000);
-                document.getElementById('fake-number').innerText = fakeNumber;
-            });
-        </script>
-    </div>
+    <form id="add-sim-form">
+        <h2>Add New SIM</h2>
+        <label for="sim-number">SIM Number:</label>
+        <input type="text" id="sim-number" name="sim-number"><br><br>
+        <label for="owner-name">Owner Name:</label>
+        <input type="text" id="owner-name" name="owner-name"><br><br>
+        <label for="phone-number">Phone Number:</label>
+        <input type="text" id="phone-number" name="phone-number"><br><br>
+        <button type="submit">Add SIM</button>
+    </form>
+
+    <script>
+        // JavaScript code to populate data and handle form submission
+        // You can add your JavaScript code here
+    </script>
 </body>
 </html>
