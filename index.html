@@ -1,78 +1,26 @@
-// SIM data array
-let simData = [
-    { id: 1, simNumber: "1234567890", ownerName: "John Doe", phoneNumber: "03001234567" },
-    { id: 2, simNumber: "9876543210", ownerName: "Jane Doe", phoneNumber: "03007654321" },
-    // Add more data here
-];
-
-// Function to populate SIM data in table
-function populateSimData() {
-    let simTableBody = document.getElementById("sim-data");
-    simTableBody.innerHTML = "";
-
-    simData.forEach((sim) => {
-        let row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${sim.id}</td>
-            <td>${sim.simNumber}</td>
-            <td>${sim.ownerName}</td>
-            <td>${sim.phoneNumber}</td>
-            <td>
-                <button onclick="editSim(${sim.id})">Edit</button>
-                <button onclick="deleteSim(${sim.id})">Delete</button>
-            </td>
-        `;
-        simTableBody.appendChild(row);
-    });
-}
-
-// Function to add new SIM
-function addSim(simNumber, ownerName, phoneNumber) {
-    let newSim = {
-        id: simData.length + 1,
-        simNumber: simNumber,
-        ownerName: ownerName,
-        phoneNumber: phoneNumber,
-    };
-    simData.push(newSim);
-    populateSimData();
-}
-
-// Function to edit SIM
-function editSim(id) {
-    let sim = simData.find((sim) => sim.id === id);
-    if (sim) {
-        let newSimNumber = prompt("Enter new SIM number:");
-        let newOwnerName = prompt("Enter new owner name:");
-        let newPhoneNumber = prompt("Enter new phone number:");
-
-        sim.simNumber = newSimNumber;
-        sim.ownerName = newOwnerName;
-        sim.phoneNumber = newPhoneNumber;
-        populateSimData();
-    }
-}
-
-// Function to delete SIM
-function deleteSim(id) {
-    simData = simData.filter((sim) => sim.id !== id);
-    populateSimData();
-}
-
-// Event listener for add SIM form submission
-document.getElementById("add-sim-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    let simNumber = document.getElementById("sim-number").value;
-    let ownerName = document.getElementById("owner-name").value;
-    let phoneNumber = document.getElementById("phone-number").value;
-
-    addSim(simNumber, ownerName, phoneNumber);
-
-    // Clear form fields
-    document.getElementById("sim-number").value = "";
-    document.getElementById("owner-name").value = "";
-    document.getElementById("phone-number").value = "";
-});
-
-// Populate SIM data on page load
-populateSimData();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Banned</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 40px auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WhatsApp Banned</h1>
+        <p>Your WhatsApp account has been banned.</p>
+        <p>Reason: [Insert reason here]</p>
+        <p>Contact us: [Insert contact information here]</p>
+    </div>
+</body>
+</html>
